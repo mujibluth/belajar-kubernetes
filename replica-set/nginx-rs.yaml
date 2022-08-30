@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-belajar-rs
+  # labels:
+  #   label-key1: label-value1
+  # annotations:
+  #   annotation-key1: annotation-value1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-belajar-rs
+  template:
+    metadata:
+      name: pod-nginx-belajar-rs
+      labels:
+        app: nginx-belajar-rs
+    spec:
+      containers:
+      - name: container-nginx-belajar-rs
+        image: nginx
+        ports:
+        - containerPort: 80
+        # readinessProbe:
+        #   httpGet:
+        #     path: /health
+        #     port: 80
+        #   initialDelaySeconds: 0
+        #   periodSeconds: 10
+        #   failureThreshold: 3
+        #   successThreshold: 1
+        #   timeoutSeconds: 1

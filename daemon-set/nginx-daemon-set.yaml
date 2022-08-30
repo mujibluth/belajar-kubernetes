@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-belajar-daemonset
+  labels:
+    label-key1: nginx-belajar-daemonset
+  # annotations:
+  #   annotation-key1: annotation-value1
+spec:
+  selector:
+    matchLabels:
+      name: nginx-belajar-daemonset
+    # matchExpressions:
+    #   - key: label-key1
+    #     operator: In
+    #     values:
+    #       - label-value1
+  template:
+    metadata:
+      name: pod-nginx-belajar-daemonset
+      labels:
+        name: nginx-belajar-daemonset
+    spec:
+      containers:
+        - name: container-nginx-belajar-daemonset
+          image: nginx
+          ports:
+            - containerPort: 80
+          # readinessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 80
+          #   initialDelaySeconds: 0
+          #   periodSeconds: 10
+          #   failureThreshold: 3
+          #   successThreshold: 1
+          #   timeoutSeconds: 1

@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-belajar-rc
+  # labels:
+  #   label-key1: label-value1 
+  # annotations:
+  #   annotation-key1: annotation-value1
+spec:
+  replicas: 3
+  selector:
+    app: this-selector-pod-nginx
+
+  template:
+    metadata:
+      name: nginx-belajar-rc
+      labels:
+        app: this-selector-pod-nginx
+    spec:
+      containers:
+        - name: this-container-nginx-rc
+          image: nginx
+          ports:
+            - containerPort: 80
+          # readinessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 80
+          #   initialDelaySeconds: 0
+          #   periodSeconds: 10
+          #   failureThreshold: 3
+          #   successThreshold: 1
+          #   timeoutSeconds: 1

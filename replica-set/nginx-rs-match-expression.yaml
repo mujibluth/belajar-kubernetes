@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-belajar-rs-match-expression
+  # labels:
+  #   label-key1: label-value1
+  # annotations:
+  #   annotation-key1: annotation-value1
+spec:
+  replicas: 3
+  selector:
+    # matchLabels:
+    #   label-key1: label-value1
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - nginx-belajar-rs-match-expression
+      - key: env
+        operator: In
+        values:
+          - prod
+          - qa
+          - dev
+  template:
+    metadata:
+      name: pod-nginx-belajar-rs-match-expression
+      labels:
+        app: nginx-belajar-rs-match-expression
+        env: prod
+    spec:
+      containers:
+      - name: container-nginx-belajar-rs-match-expression
+        image: nginx
+        ports:
+        - containerPort: 80
+        # readinessProbe:
+        #   httpGet:
+        #     path: /health
+        #     port: 80
+        #   initialDelaySeconds: 0
+        #   periodSeconds: 10
+        #   failureThreshold: 3
+        #   successThreshold: 1
+        #   timeoutSeconds: 1
